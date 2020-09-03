@@ -9,3 +9,10 @@ Allows specifying:
 - scaleAspectFill
 - explicit pixel dimensions or screenScale dimensions
 
+Example output using UIView Extension:
+
+![UIView Extension](ExampleOutputImages/UIViewExtension.JPG)
+
+Example output using UIImage Extension:
+
+![UIImage Extension](ExampleOutputImages/UIImageExtension.JPG)
