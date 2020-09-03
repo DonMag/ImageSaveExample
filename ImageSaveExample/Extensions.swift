@@ -100,4 +100,5 @@ extension UIImage {
 		
 		return scaledImage
 	}
+	
 }
