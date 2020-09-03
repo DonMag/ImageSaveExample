@@ -13,32 +13,20 @@ extension UIView {
 	// this method will work, but uses multiple image scaling operations
 	// resulting in loss of image quality
 	
-	// returns UIImage matching current layout
-	func asImage(bool useScreenScale: Bool? = true) -> UIImage {
-		// if we want a pixel-exact image, set format.scale = 1
+	func resizedImage(_ size: CGSize, useScreenScale: Bool? = true) -> UIImage {
 		let format = UIGraphicsImageRendererFormat()
 		if useScreenScale == false {
 			format.scale = 1
 		}
 		// use bounds of self
-		let renderer = UIGraphicsImageRenderer(bounds: bounds, format: format)
-		return renderer.image { rendererContext in
+		var renderer = UIGraphicsImageRenderer(bounds: bounds, format: format)
+		let img = renderer.image { rendererContext in
 			layer.render(in: rendererContext.cgContext)
 		}
-	}
-	
-	// returns UIImage of self, resized to size
-	func resizedImage(_ size: CGSize, useScreenScale: Bool? = true) -> UIImage {
-		let image = self.asImage(bool: useScreenScale)
-		
-		// if we want a pixel-exact image, set format.scale = 1
-		let format = UIGraphicsImageRendererFormat()
-		if useScreenScale == false {
-			format.scale = 1
-		}
-		let renderer = UIGraphicsImageRenderer(size: size, format: format)
+		// use target size
+		renderer = UIGraphicsImageRenderer(size: size, format: format)
 		return renderer.image { (context) in
-			image.draw(in: CGRect(origin: .zero, size: size))
+			img.draw(in: CGRect(origin: .zero, size: size))
 		}
 	}
 	
